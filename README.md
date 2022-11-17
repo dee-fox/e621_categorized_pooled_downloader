@@ -10,6 +10,5 @@ Run main.py. The first question you'll be asked is your search query. The second
 The third is a rating threshold (if the post doesn't meet it, it won't be downloaded).
 If required, uncomment the login line and put a username and API key there.
 
-## Troubleshooting
-### No module named 'e621_endpoints'
-Copy the file named that from <a href=https://github.com/tracer755/e621-wrappers>this package<a>'s folder to the folder you're running main.py from.
+## Known issues
+None. Report if there are any.
