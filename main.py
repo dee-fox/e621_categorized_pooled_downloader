@@ -65,7 +65,6 @@ while not rate_set:
     except ValueError:
         rate_set = False
 for post_rate in posts:
-    # noinspection PyUnboundLocalVariable
     if post_rate['score']['total'] < rate:
         posts.remove(post_rate)
 main()    # leftover!
