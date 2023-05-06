@@ -26,29 +26,28 @@ def download_pool(pool_id):
 
 def main():
     for post in posts:
-       all_tags = post['tags']['artist'] + post['tags']['general'] + post['tags']['species'] + post['tags']['character'] + post['tags']['copyright'] + post['tags']['lore'] + post['tags']['invalid'] + post['tags']['meta']
-       pool_download = False
-       for pool_id in post['pools']:
-           pool_download = True
-           new_pool = True
-           for pools in pool_downloaded_list:
-               if pools == pool_id:
-                   new_pool = False
-           if not new_pool:
-               break
-           download_pool(pool_id)
-           pool_downloaded_list.append(pool_id)
-       if not pool_download:
+        all_tags = post['tags']['artist'] + post['tags']['general'] + post['tags']['species'] + post['tags']['character'] + post['tags']['copyright'] + post['tags']['lore'] + post['tags']['invalid'] + post['tags']['meta']
+        pool_download = False
+        for pool_id in post['pools']:
+            pool_download = True
+            new_pool = True
+            for pools in pool_downloaded_list:
+                if pools == pool_id:
+                    new_pool = False
+            if not new_pool:
+                break
+            download_pool(pool_id)
+            pool_downloaded_list.append(pool_id)
+        if not pool_download:
             match = None
-            for tag in all_tags:
-                for category in categories:
-                    if tag == category:
-                        match = category
-            if match is not None:
-                download(post['id'], match)
-            else:
-                uncategorized_download(post['id'])
-
+        for tag in all_tags:
+            for category in categories:
+                if tag == category:
+                    match = category
+        if match is not None:
+            download(post['id'], match)
+        else:
+            uncategorized_download(post['id'])
 
 
 api = e621.client()
@@ -66,7 +65,8 @@ while not rate_set:
     except ValueError:
         rate_set = False
 for post_rate in posts:
+    # noinspection PyUnboundLocalVariable
     if post_rate['score']['total'] < rate:
         posts.remove(post_rate)
-main()    #leftover!
+main()    # leftover!
 print('Downloads done.')
