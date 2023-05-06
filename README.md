@@ -2,7 +2,7 @@
 ## Requirements
 <a href=https://github.com/tracer755/e621-wrappers>Python e621 API wrapper<a>
 
-<a href=https://www.python.org>Python >=3.11<a>
+<a href=https://www.python.org>Python >=3.7<a>
 
 <a href=https://pypi.org/project/requests/>Requests<a>
 ## How to use
