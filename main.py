@@ -3,13 +3,15 @@ import e621py_wrapper as e621
 
 def download(ident, cat):
     print(f'Downloading post {ident} in category {cat}...')
-    api.util.save(ident, f"{cat.replace('/', ' ')}/")
-    print('done')
+    better_cat = cat.replace('/', ' slash ')
+    better_cat = better_cat.replace('_', ' ')
+    api.util.save(ident, f"{better_cat}/")
+    print('Done')
 
 
 def uncategorized_download(ident):
     print(f'Downloading post {ident}, uncategorized...')
-    api.util.save(ident, "Uncategorized/")
+    api.util.save(ident, "uncategorized/")
     print('done')
 
 
@@ -48,20 +50,23 @@ def main():
                 uncategorized_download(post['id'])
 
 
-try:
-    api = e621.client()
-    pool_downloaded_list = []
-#    api.login('username', 'api key')
-    posts = api.posts.search(input('What do you want to fuck today? '), '', 1000)
-    categories = input('What would you like to categorize? ')
-    categories = categories.split()
-    downloader = set()
-    rate = int(input('What will the rating threshold be? '))
-    for post_rate in posts:
-        if post_rate['score']['total'] < rate:
-            posts.remove(post_rate)
-except ValueError:
-    print('You should have put in a number. Crashing!')
-    exit(69)
+
+api = e621.client()
+pool_downloaded_list = []
+# api.login('username', 'api key')
+posts = api.posts.search(input('Search query: '), '', 1000)
+categories = input('Categories: ')
+categories = categories.split()
+downloader = set()
+rate_set = False
+while not rate_set:
+    try:
+        rate = int(input('Rating threshold: '))
+        rate_set = True
+    except ValueError:
+        rate_set = False
+for post_rate in posts:
+    if post_rate['score']['total'] < rate:
+        posts.remove(post_rate)
 main()    #leftover!
 print('Downloads done.')
