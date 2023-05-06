@@ -1,8 +1,8 @@
 ---
 name: Feature request
-about: hey dee, make this
+about: add new stuff please
 title: ''
-labels: enhancement, wontfix
+labels: enhancement
 assignees: dee-fox
 
 ---
